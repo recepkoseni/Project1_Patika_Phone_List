@@ -8,8 +8,11 @@ namespace Project1_Patika
 {
     class kisiler
     {
+        
 
+        
         public kisiler() { }
+
 
         public string isim;
         public string soyisim;
@@ -24,9 +27,16 @@ namespace Project1_Patika
             Isim = isim;
             Soyisim = soyisim;
             Cep = cep;
-         
-        
+
+           
+
+           
+
+
         }
+
+
+
     }
 
 }

@@ -12,43 +12,52 @@ namespace Project1_Patika
         {
             islemler yeniIslem = new islemler();
             List<kisiler> person1 = new List<kisiler>();
+            
 
+
+            
+            yeniIslem.Rehber();
 
             while (true)
             {
-                Console.WriteLine("Lütfen yapmak istediğiniz işlemi seciniz veya cikmak icin E basiniz :) ");
-                Console.WriteLine("********************************************");
-                Console.WriteLine("(1) Yeni Numara Kaydetmek) ");
-                Console.WriteLine("(2) Varolan Numarayi Silmek ");
-                Console.WriteLine("(3) Varolan Numarayi Güncellemek ");
-                Console.WriteLine("(4) Rehberi Listelemek ");
-                Console.WriteLine("(5) Rehberde Arama Yapmak");
-
-
-
                 try
                 {
-                    string giris = Convert.ToString(Console.ReadLine());
-
-                    if (giris == "1")
+                    int secim = int.Parse(Console.ReadLine());
+                    switch (secim)
                     {
-
-                       person1= yeniIslem.kayitEkle();
+                        case 1:
+                            yeniIslem.kayitEkle();
+                            break;
+                        case 2:
+                            yeniIslem.kayitSil();
+                            break;
+                        case 3:
+                            yeniIslem.kayitGuncelle();
+                            break;
+                        case 4:
+                            yeniIslem.kayitListele();
+                            break;
+                        case 5:
+                            yeniIslem.kayitAra();
+                            break;
+                        case 0:
+                            Console.WriteLine("Program Kapatılıyor.");
+                            break;
+                        default:
+                            Console.WriteLine("Program Kapatılıyor.");
+                            break;
 
                     }
-
-                    else if (giris == "4")
-                    {
-                        yeniIslem.kayitListele(person1);
-                    }
-
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Console.WriteLine("Hatalı giriş yaptiniz !");
 
-                } 
+                    Console.WriteLine("Hatalı Seçim. Program Kapanıyor " + ex.Message);
+                }
+
+
             }
+
 
 
         }
