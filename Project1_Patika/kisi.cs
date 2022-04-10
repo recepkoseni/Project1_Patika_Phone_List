@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Project1_Patika
 {
-    class kisiler
+    class kisi
     {
         
 
         
-        public kisiler() { }
+        public kisi() { }
 
 
         public string isim;
@@ -22,7 +22,7 @@ namespace Project1_Patika
         public string Soyisim { get => soyisim; set => soyisim = value; }
         public string Cep { get => cep; set => cep = value; }
 
-        public kisiler(string isim, string soyisim, string cep) 
+        public kisi(string isim, string soyisim, string cep) 
         {
             Isim = isim;
             Soyisim = soyisim;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Project1_Patika
 {
     class Program
@@ -11,12 +12,13 @@ namespace Project1_Patika
         static void Main(string[] args)
         {
             islemler yeniIslem = new islemler();
-            List<kisiler> person1 = new List<kisiler>();
+            List<kisi> person1 = new List<kisi>();
             
 
 
             
             yeniIslem.Rehber();
+            yeniIslem.Menu();
 
             while (true)
             {
@@ -42,6 +44,7 @@ namespace Project1_Patika
                             break;
                         case 0:
                             Console.WriteLine("Program Kapatılıyor.");
+                            
                             break;
                         default:
                             Console.WriteLine("Program Kapatılıyor.");
@@ -53,6 +56,8 @@ namespace Project1_Patika
                 {
 
                     Console.WriteLine("Hatalı Seçim. Program Kapanıyor " + ex.Message);
+
+                    yeniIslem.Menu();                
                 }
 
 

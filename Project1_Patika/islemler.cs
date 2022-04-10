@@ -6,34 +6,34 @@ using System.Threading.Tasks;
 
 namespace Project1_Patika
 {
-    class islemler : kisiler
+    class islemler : kisi
     {
-        kisiler kisi = new kisiler();
-        public List<kisiler> person = new List<kisiler>();
+        kisi kisi = new kisi();
+        public List<kisi> person = new List<kisi>();
 
 
         public void Rehber()
         {
             //Default 5 kisilik listeyi ekli halde listele
 
-            person.Add(new kisiler("Recep", "Koseni", "1234567890"));
-            person.Add(new kisiler("Ebru", "Koseni", "1234567890"));
-            person.Add(new kisiler("Sibel", "Koseni", "1234567890"));
-            person.Add(new kisiler("Eyyup", "Koseni", "1234567890"));
-            person.Add(new kisiler("Saban", "Koseni", "1234567890"));
+            person.Add(new kisi("Recep", "Koseni", "9090"));
+            person.Add(new kisi("Batman", "Koseni", "7272"));
+            person.Add(new kisi("Spiderman", "Koseni", "1111"));
+            person.Add(new kisi("Ironman", "Koseni", "7878"));
+            person.Add(new kisi("Xman", "Koseni", "0000"));
         }
         public void kayitEkle()
         {
 
 
-            Console.WriteLine("Lütfen isim giriniz: ");
+            Console.WriteLine("\nLütfen isim giriniz: ");
             isim = Console.ReadLine();
             Console.WriteLine("Lütfen soyisim giriniz: ");
             soyisim = Console.ReadLine();
             Console.WriteLine("Lütfen cep numarasi giriniz: ");
             cep = Console.ReadLine();
 
-            person.Add(new kisiler(isim, soyisim, cep));
+            person.Add(new kisi(isim, soyisim, cep));
 
 
             kayitListele();
@@ -77,8 +77,19 @@ namespace Project1_Patika
 
             }
 
+            Menu();
 
+            //try
+            //{
+               
+            //    string secim = Console.ReadLine();
+            //}
+            //catch (Exception)
+            //{
 
+            //    Console.WriteLine("Hatali Giriş.Tekrar deneyiniz");
+            //    ka
+            //}
 
 
         }
@@ -88,12 +99,15 @@ namespace Project1_Patika
 
             Console.WriteLine("Lütfen numarasini silmek istediğiniz kisinin adini veya soyadini giriniz");
             string silinicekKisi = Console.ReadLine();
+        
 
             //Kisi Var ise
 
-            if (person.Contains("soyisim") || person.Contains("isim"))
+            if (person.Any(c=> c.Isim.Contains(silinicekKisi)) || person.Any(c => c.Soyisim.Contains(silinicekKisi)))
             {
-                Console.WriteLine($"{isim} {soyisim} isimli kişi rehberden silinmek üzere, onaylıyor musunuz ? (y/n) ");
+
+                kisi kisiSilinecek = person.First(c => c.Isim.Contains(silinicekKisi) || c.soyisim.Contains(silinicekKisi));
+                Console.WriteLine($"{kisiSilinecek.Isim} {kisiSilinecek.Soyisim} isimli kişi rehberden silinmek üzere, onaylıyor musunuz ? (y/n) ");
 
                 try
                 {
@@ -101,8 +115,8 @@ namespace Project1_Patika
                     switch (onay)
                     {
                         case 'y':
-                            Console.WriteLine($"{isim} isimli kişi rehberden başarıyla silindi");
-                            person.Remove("isim yada soyadi");
+                            Console.WriteLine($"{kisiSilinecek.Isim} isimli kişi rehberden başarıyla silindi\n");
+                            person.Remove(kisiSilinecek);
                             break;
 
                         case 'n':
@@ -153,27 +167,37 @@ namespace Project1_Patika
 
             }
 
+            
+            Menu();
+
         }
 
         public void kayitGuncelle()
         {
 
-            Console.WriteLine("Lütfen numarasini güncellemek istediğiniz kisinin adini veya soyadini giriniz")
+            Console.WriteLine("Lütfen numarasini güncellemek istediğiniz kisinin adini veya soyadini giriniz\n");
 
             string guncellenecekKisi = Console.ReadLine();
 
 
-            if (person.Contains(new kisiler(guncellenecekKisi)))
+            if (person.Count(c=>c.Isim.Contains(guncellenecekKisi))>0 || person.Count(c => c.Soyisim.Contains(guncellenecekKisi)) > 0) // 
             {
-                Console.WriteLine("Yeni numarayi giriniz:");
+                Console.WriteLine("\nYeni numarayi giriniz:");
 
                 string numara = Console.ReadLine();
 
-                var varmi = person.FirstOrDefault(c => c.isim == guncellenecekKisi);
+                kisi varmi = person.FirstOrDefault(c => c.Isim == guncellenecekKisi || c.Soyisim==guncellenecekKisi);
 
                 if (varmi != null)
                 {
-                    varmi.cep = numara;
+                    varmi.Cep = numara;
+
+
+                    Console.WriteLine($"\nisim : {varmi.Isim}");
+                    Console.WriteLine($"soyisim : {varmi.Soyisim}");
+                    Console.WriteLine($"Telefon Numarasi : {varmi.Cep}\n");
+
+                   
                 }
             }
 
@@ -184,7 +208,7 @@ namespace Project1_Patika
             {
                 Console.WriteLine("Aradığınız krtiterlere uygun veri rehberde bulunamadı. Lütfen bir seçim yapınız.");
                 Console.WriteLine("(1) Güncellemeyi Sonlandır ");
-                Console.WriteLine("(2) Yeniden Dene           ");
+                Console.WriteLine("(2) Yeniden Dene           \n");
 
                 try
                 {
@@ -198,7 +222,7 @@ namespace Project1_Patika
                             break;
                         default:
                             Console.WriteLine("Yanlış bir seçim girildi.");
-                            Console.WriteLine("Lütfen(1) veya (2) seçeneklerinden birini seçiniz. ");
+                            Console.WriteLine("Lütfen(1) veya (2) seçeneklerinden birini seçiniz. \n");
                             break;
                     }
                 }
@@ -211,7 +235,7 @@ namespace Project1_Patika
 
             }
 
-
+            Menu();
 
         }
 
@@ -230,14 +254,17 @@ namespace Project1_Patika
                 {
                     case 1:
 
+                        Console.WriteLine("\nAranacak kisinin adini giriniz:");
                         string aranacakKisi = Console.ReadLine();
 
-                        foreach (kisiler item in person)
+                        foreach (kisi item in person)
                         {
-                            if(item.isim.ToLower()==aranacakKisi.ToLower() || item.soyisim.ToLower()==aranacakKisi.ToLower())
+                            if(item.Isim.ToLower()==aranacakKisi.ToLower() || item.soyisim.ToLower()==aranacakKisi.ToLower())
                             {
                                 Console.WriteLine("Arama Sonuçlarınız:\n*********************************************");
-                                Console.WriteLine(aranacakKisi);
+                                Console.WriteLine($"\nisim : {item.Isim}");
+                                Console.WriteLine($"soyisim : {item.Soyisim}");
+                                Console.WriteLine($"Telefon Numarasi : {item.Cep}\n");
                             }
                         }
 
@@ -245,14 +272,18 @@ namespace Project1_Patika
 
                     case 2:
 
+                        Console.WriteLine("\nAranacak kisinin cep numarasını giriniz:");
                         string aranacakNum = Console.ReadLine();
 
-                        foreach (kisiler item in person)
+                        foreach (kisi item in person)
                         {
                             if (item.Cep == aranacakNum)
                             {
-                                Console.WriteLine("Arama Sonuçlarınız:\n*********************************************");
-                                Console.WriteLine(kisi);
+                                Console.WriteLine("\nArama Sonuçlarınız:*********************************************");
+                                Console.WriteLine($"\nisim : {item.Isim}");
+                                Console.WriteLine($"soyisim : {item.Soyisim}");
+                                Console.WriteLine($"Telefon Numarasi : {item.Cep}\n");
+
                             }
 
                         }
@@ -263,6 +294,8 @@ namespace Project1_Patika
                         Console.WriteLine("Hatalı Seçim");
                         kayitAra();
                         break;
+
+                        
                 }
 
             }
@@ -274,6 +307,7 @@ namespace Project1_Patika
             }
 
 
+            Menu();
         }
 
 
